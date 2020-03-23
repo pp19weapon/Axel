@@ -13,6 +13,6 @@ public:
 	}
 };
 
-Axel::Application* Axel::CreateApplication() {
+Axel::Application* Axel::createApplication() {
 	return new Sandbox();
 }

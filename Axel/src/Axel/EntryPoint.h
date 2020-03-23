@@ -3,10 +3,15 @@
 
 #ifdef AX_PLATFORM_WINDOWS
 
-extern Axel::Application* Axel::CreateApplication();
+extern Axel::Application* Axel::createApplication();
 
 int main(int argc, char** argv) {
-	auto app = Axel::CreateApplication();
+	Axel::Log::init();
+	AX_CORE_WARN("Initialized log!");
+	int a = 8;
+	AX_INFO("HEllo var={0}", a);
+
+	auto app = Axel::createApplication();
 	app->run();
 	delete app;
 }

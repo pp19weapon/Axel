@@ -13,7 +13,7 @@ namespace Axel {
 		void run();
 	};
 
-	Application* CreateApplication();
+	Application* createApplication();
 
 }
 
