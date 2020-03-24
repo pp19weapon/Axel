@@ -9,3 +9,6 @@
 #else
 	#error Axel only supports windows for now!
 #endif // AX_PLATFORM_WINDOWS
+
+
+#define BIT(x) (1 << x)
