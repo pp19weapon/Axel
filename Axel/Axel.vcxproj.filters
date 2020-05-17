@@ -4,6 +4,15 @@
     <Filter Include="Axel">
       <UniqueIdentifier>{0FC0827C-FBF6-830D-A4E3-691090F9FF0E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Axel\Events">
+      <UniqueIdentifier>{13E53B19-7F9A-B40E-088F-AEE57443AB12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Axel.h" />
@@ -16,9 +25,28 @@
     <ClInclude Include="src\Axel\EntryPoint.h">
       <Filter>Axel</Filter>
     </ClInclude>
+    <ClInclude Include="src\Axel\Events\ApplicationEvent.h">
+      <Filter>Axel\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Axel\Events\Event.h">
+      <Filter>Axel\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Axel\Events\KeyEvent.h">
+      <Filter>Axel\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Axel\Events\MouseEvent.h">
+      <Filter>Axel\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Axel\Log.h">
       <Filter>Axel</Filter>
     </ClInclude>
+    <ClInclude Include="src\Axel\Window.h">
+      <Filter>Axel</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\axpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Axel\Application.cpp">
@@ -27,5 +55,9 @@
     <ClCompile Include="src\Axel\Log.cpp">
       <Filter>Axel</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\axpch.cpp" />
   </ItemGroup>
 </Project>

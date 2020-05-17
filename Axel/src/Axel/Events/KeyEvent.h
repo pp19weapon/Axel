@@ -2,7 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
 
 namespace Axel {
 	class AXEL_API KeyEvent : public Event {

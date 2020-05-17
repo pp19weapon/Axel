@@ -1,12 +1,18 @@
+#include "axpch.h"
 #include "Application.h"
 
-#include "Axel/Events/ApplicationEvent.h"
 #include "Axel/Log.h"
 
+#include "GLFW/glfw3.h"
+
 namespace Axel {
+#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
 
 	Application::Application()
 	{
+		m_window = std::unique_ptr<Window>(Window::create());
+		m_window->setEventCallback(BIND_EVENT_FN(onEvent));
 	}
 
 	Application::~Application()
@@ -15,9 +21,23 @@ namespace Axel {
 
 	void Application::run()
 	{
-		WindowResizeEvent e(1200, 720);
-		AX_TRACE(e.toString());
+		while (m_running) {
+			glClearColor(1, 0, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_window->onUpdate();
+		}
+	}
 
-		while (true);
+	void Application::onEvent(Event& e)
+	{
+		EventDispatcher eventDispatcher(e);
+		eventDispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FN(onWindowClose));
+
+		AX_CORE_TRACE("{0}", e.toString());
+	}
+	bool Application::onWindowClose(WindowCloseEvent e)
+	{
+		m_running = false;
+		return true;
 	}
 }

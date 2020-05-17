@@ -2,8 +2,6 @@
 
 #include "Axel/Core.h"
 
-#include <string>
-#include <functional>
 
 namespace Axel {
 	enum class EventType {
@@ -42,7 +40,7 @@ namespace Axel {
 			return getCategoryFlags() & category;
 		}
 	protected:
-		bool m_handled = false;
+		bool handled = false;
 	};
 
 	class AXEL_API EventDispatcher

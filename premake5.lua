@@ -10,6 +10,12 @@ workspace "Axel"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution dir)
+includeDir = {}
+includeDir["GLFW"] = "Axel/vendor/GLFW/include"
+
+include "Axel/vendor/GLFW"
+
 project "Axel"
     location "Axel"
     kind "SharedLib"
@@ -17,6 +23,9 @@ project "Axel"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "axpch.h"
+    pchsource "Axel/src/axpch.cpp"
 
     files
     {
@@ -27,7 +36,14 @@ project "Axel"
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{includeDir.GLFW}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter "system:windows"
@@ -48,7 +64,7 @@ project "Axel"
 
 
     filter "configurations:Debug"
-        defines "AX_DEBUG"
+        defines {"AX_DEBUG", "AX_ENABLE_ASSERTS"}
         symbols "On"
 
     filter "configurations:Release"
@@ -96,7 +112,7 @@ project "Sandbox"
 
 
     filter "configurations:Debug"
-        defines "AX_DEBUG"
+        defines {"AX_DEBUG", "AX_ENABLE_ASSERTS"}
         symbols "On"
 
     filter "configurations:Release"
