@@ -1,7 +1,5 @@
 #include "Axel.h"
 
-#define AX_DEBUG
-
 class ExampleLayer : public Axel::Layer {
 public:
 	ExampleLayer()
