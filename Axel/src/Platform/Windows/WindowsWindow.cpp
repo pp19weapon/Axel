@@ -5,6 +5,8 @@
 #include "Axel/Events/MouseEvent.h"
 #include "Axel/Events/KeyEvent.h"
 
+#include "glad/glad.h"
+
 namespace Axel {
 
 	static bool s_GLFWInitialized = false;
@@ -59,7 +61,7 @@ namespace Axel {
 		if (!s_GLFWInitialized)
 		{
 			int success = glfwInit();
-			AX_CORE_ASSERTS(success, "Could not initialize GLFW!");
+			AX_CORE_ASSERT(success, "Could not initialize GLFW!");
 
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
@@ -67,6 +69,8 @@ namespace Axel {
 
 		m_window = glfwCreateWindow((int)props.width, (int)props.height, m_data.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		AX_CORE_ASSERT(status, "Failed to init Glad!");
 		glfwSetWindowUserPointer(m_window, &m_data);
 		setVSync(true);
 
@@ -117,6 +121,14 @@ namespace Axel {
 						AX_CORE_CRITICAL("No action from window key event could have been recognised! Action recived: {0}", action);
 						break;
 					}
+			});
+
+		glfwSetCharCallback(m_window, [](GLFWwindow* window, unsigned int keycode) 
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				KeyTypedEvent event(keycode);
+				data.eventCallback(event);
 			});
 
 		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods) 

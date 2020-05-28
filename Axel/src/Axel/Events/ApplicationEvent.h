@@ -3,8 +3,7 @@
 #include "Event.h"
 
 namespace Axel {
-	class WindowResizeEvent : public Event
-	{
+	class WindowResizeEvent : public Event {
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
 			: m_width(width), m_height(height) {}

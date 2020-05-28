@@ -7,7 +7,7 @@ extern Axel::Application* Axel::createApplication();
 
 int main(int argc, char** argv) {
 	Axel::Log::init();
-	AX_CORE_WARN("Initialized log!");
+	AX_CORE_INFO("Initialized log!");
 
 	auto app = Axel::createApplication();
 	app->run();
