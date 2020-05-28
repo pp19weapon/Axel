@@ -4,6 +4,3 @@
 [submodule "Axel/vendor/GLFW"]
 	path = Axel/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
-[submodule "Axel/vendor/imgui"]
-	path = Axel/vendor/imgui
-	url = https://github.com/ocornut/imgui
