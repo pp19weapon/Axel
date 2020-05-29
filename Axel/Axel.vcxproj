@@ -59,6 +59,7 @@
     <IntDir>..\bin-int\Debug-windows-x86_64\Axel\</IntDir>
     <TargetName>Axel</TargetName>
     <TargetExt>.dll</TargetExt>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -158,11 +159,14 @@
     <ClInclude Include="src\Axel\Events\KeyEvent.h" />
     <ClInclude Include="src\Axel\Events\MouseEvent.h" />
     <ClInclude Include="src\Axel\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Axel\Input.h" />
+    <ClInclude Include="src\Axel\KeyCodes.h" />
     <ClInclude Include="src\Axel\Layer.h" />
     <ClInclude Include="src\Axel\LayerStack.h" />
     <ClInclude Include="src\Axel\Log.h" />
     <ClInclude Include="src\Axel\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\axpch.h" />
   </ItemGroup>
@@ -173,6 +177,7 @@
     <ClCompile Include="src\Axel\LayerStack.cpp" />
     <ClCompile Include="src\Axel\Log.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\axpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -188,6 +193,9 @@
     <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Axel\MouseButtonCodes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

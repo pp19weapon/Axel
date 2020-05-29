@@ -7,7 +7,9 @@ public:
 	{}
 
 	void onUpdate() override {
-		AX_INFO("Example Layer onUpdate test");
+		if (Axel::Input::isKeyPressed(AX_KEY_A)) {
+			AX_INFO("WOW");
+		}
 	}
 
 	void onEvent(Axel::Event& event) override {
