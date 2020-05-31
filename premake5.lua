@@ -16,6 +16,7 @@ includeDir = {}
 includeDir["GLFW"] = "Axel/vendor/GLFW/include"
 includeDir["Glad"] = "Axel/vendor/Glad/include"
 includeDir["ImGui"] = "Axel/vendor/imgui"
+includeDir["glm"] = "Axel/vendor/glm"
 
 group "Dependencies"
     include "Axel/vendor/GLFW"
@@ -47,7 +48,8 @@ project "Axel"
         "%{prj.name}/vendor/spdlog/include",
         "%{includeDir.GLFW}",
         "%{includeDir.Glad}",
-        "%{includeDir.ImGui}"
+        "%{includeDir.ImGui}",
+        "%{includeDir.glm}"
     }
 
     links
@@ -108,7 +110,9 @@ project "Sandbox"
     includedirs
     {
         "Axel/vendor/spdlog/include",
-        "Axel/src"
+        "Axel/src",
+        "Axel/vendor",
+        "%{includeDir.glm}"
     }
 
     links

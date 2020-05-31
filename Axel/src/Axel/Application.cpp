@@ -7,6 +7,7 @@
 
 #include "Input.h"
 
+
 namespace Axel {
 	Application* Application::s_instance = nullptr;
 
@@ -17,6 +18,9 @@ namespace Axel {
 
 		m_window = std::unique_ptr<Window>(Window::create());
 		m_window->setEventCallback(AX_BIND_EVENT_FN(Application::onEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		pushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -32,6 +36,13 @@ namespace Axel {
 			for (Layer* layer : m_layerStack) {
 				layer->onUpdate();
 			}
+
+			m_ImGuiLayer->begin();
+			for (Layer* layer : m_layerStack) {
+				layer->onImGuiRender();
+			}
+			m_ImGuiLayer->end();
+
 
 			m_window->onUpdate();
 		}

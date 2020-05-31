@@ -7,3 +7,7 @@
 [submodule "Axel/vendor/imgui"]
 	path = Axel/vendor/imgui
 	url = https://github.com/vargaszabolcs/imgui
+[submodule "Axel/vendor/glm"]
+	path = Axel/vendor/glm
+	url = https://github.com/g-truc/glm
+	branch = master

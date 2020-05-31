@@ -1,18 +1,26 @@
 #include "Axel.h"
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Axel::Layer {
 public:
 	ExampleLayer()
 		: Layer("Example")
 	{}
 
-	void onUpdate() override {
+	virtual void onUpdate() override {
 		if (Axel::Input::isKeyPressed(AX_KEY_A)) {
 			AX_INFO("WOW");
 		}
 	}
 
-	void onEvent(Axel::Event& event) override {
+	virtual void onImGuiRender() override {
+		ImGui::Begin("TEST");
+		ImGui::Text("Hello World");
+		ImGui::End();
+	}
+
+	virtual void onEvent(Axel::Event& event) override {
 		AX_TRACE("{0}", event.toString());
 	}
 };
@@ -22,7 +30,6 @@ public:
 	Sandbox() 
 	{
 		pushLayer(new ExampleLayer());
-		pushOverlay(new Axel::ImGuiLayer());
 	}
 	
 	~Sandbox()

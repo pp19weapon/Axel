@@ -6,6 +6,7 @@
 #include "Axel/Events/ApplicationEvent.h"
 #include "Axel/LayerStack.h"
 
+#include "Axel/ImGui/ImGuiLayer.h"
 
 namespace Axel {
 
@@ -28,6 +29,7 @@ namespace Axel {
 		bool onWindowClose(WindowCloseEvent e);
 
 		std::unique_ptr<Window> m_window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_running = true;
 		LayerStack m_layerStack;
 
