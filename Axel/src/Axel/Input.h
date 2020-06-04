@@ -3,7 +3,7 @@
 #include "Axel/Core.h"
 
 namespace Axel {
-	class AXEL_API Input {
+	class Input {
 	public:
 		inline static bool isKeyPressed(int keycode) { return s_instance->isKeyPressedImpl(keycode); }
 		inline static bool isKeyReleased(int keycode) { return s_instance->isKeyReleasedImpl(keycode); }

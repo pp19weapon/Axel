@@ -5,7 +5,7 @@
 #include "spdlog/spdlog.h"
 
 namespace Axel {
-	class AXEL_API Log
+	class Log
 	{
 	public:
 		static void init();
@@ -30,7 +30,7 @@ namespace Axel {
 #define AX_WARN(...)           ::Axel::Log::getClientLoggger()->warn(__VA_ARGS__)
 
 // Only available in debug mode
-#ifdef AX_ENABLE_DEBUG_LOG
+#if AX_ENABLE_DEBUG_LOG
 	#define AX_CORE_INFO(...)      ::Axel::Log::getCoreLoggger()->info(__VA_ARGS__)
 	#define AX_CORE_TRACE(...)     ::Axel::Log::getCoreLoggger()->trace(__VA_ARGS__)
 

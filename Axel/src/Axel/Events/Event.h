@@ -27,7 +27,7 @@ namespace Axel {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int getCategoryFlags() const override { return category; }
 
-	class AXEL_API Event {
+	class Event {
 		friend class EventDispatcher;
 
 	public:
@@ -42,7 +42,7 @@ namespace Axel {
 		bool handled = false;
 	};
 
-	class AXEL_API EventDispatcher
+	class EventDispatcher
 	{
 	public:
 		EventDispatcher(Event& event)

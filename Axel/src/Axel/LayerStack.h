@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace Axel {
-	class AXEL_API LayerStack {
+	class LayerStack {
 	public:
 		LayerStack();
 		~LayerStack();

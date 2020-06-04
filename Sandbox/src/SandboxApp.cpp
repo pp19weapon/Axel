@@ -21,7 +21,6 @@ public:
 	}
 
 	virtual void onEvent(Axel::Event& event) override {
-		AX_TRACE("{0}", event.toString());
 	}
 };
 

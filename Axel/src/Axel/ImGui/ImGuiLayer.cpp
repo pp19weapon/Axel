@@ -18,9 +18,7 @@ namespace Axel {
 	{
 		
 	}
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
+
 	void ImGuiLayer::onAttach()
 	{
 		IMGUI_CHECKVERSION();
@@ -53,8 +51,6 @@ namespace Axel {
 
 	void ImGuiLayer::onImGuiRender()
 	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
 	}
 
 	void ImGuiLayer::begin()
@@ -68,7 +64,7 @@ namespace Axel {
 	{
 		auto io = ImGui::GetIO();
 		Application& app = Application::get();
-		io.DisplaySize = ImVec2(app.getWindow().getWidth(), app.getWindow().getHeight());
+		io.DisplaySize = ImVec2((float)app.getWindow().getWidth(), (float)app.getWindow().getHeight());
 
 		//Rendering
 		ImGui::Render();

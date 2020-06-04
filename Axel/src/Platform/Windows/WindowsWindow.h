@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Axel/Window.h"
+#include "Axel/Renderer/GraphicsContext.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 namespace Axel {
 	class WindowsWindow : public Window {
@@ -26,6 +27,7 @@ namespace Axel {
 		virtual void shutdown();
 	private:
 		GLFWwindow* m_window;
+		GraphicsContext* m_context;
 
 		struct WindowData
 		{

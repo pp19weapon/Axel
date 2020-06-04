@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+
 #include "Window.h"
 #include "Events/Event.h"
 #include "Axel/Events/ApplicationEvent.h"
@@ -8,13 +9,16 @@
 
 #include "Axel/ImGui/ImGuiLayer.h"
 
+#include "Axel/Renderer/Shader.h"
+#include "Axel/Renderer/Buffer.h"
+
 namespace Axel {
 
-	class AXEL_API Application
+	class Application
 	{
 	public:
 		Application();
-		virtual ~Application();
+		virtual ~Application() = default;
 
 		void run();
 
@@ -33,6 +37,11 @@ namespace Axel {
 		bool m_running = true;
 		LayerStack m_layerStack;
 
+
+		unsigned int m_vertexArray;
+		std::unique_ptr<Shader> m_shader;
+		std::unique_ptr<VertexBuffer> m_vertexBuffer;
+		std::unique_ptr<IndexBuffer> m_indexBuffer;
 	private:
 		static Application* s_instance;
 	};

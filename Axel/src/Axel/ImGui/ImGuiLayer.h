@@ -7,10 +7,10 @@
 
 
 namespace Axel {
-	class AXEL_API ImGuiLayer : public Layer {
+	class ImGuiLayer : public Layer {
 	public:
 		ImGuiLayer();
-		~ImGuiLayer();
+		~ImGuiLayer() = default;
 
 		virtual void onAttach() override;
 		virtual void onDetach() override;
