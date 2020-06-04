@@ -69,7 +69,7 @@ namespace Axel {
 			}
 		)";
 
-		m_shader = std::make_unique<Shader>(vertexSrc, fragmentSrc);
+		m_shader = std::unique_ptr<Shader>(Shader::create(vertexSrc, fragmentSrc));
 	}
 
 	void Application::run()

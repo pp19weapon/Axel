@@ -5,14 +5,11 @@
 namespace Axel {
 	class Shader {
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		~Shader();
+		virtual ~Shader() = default;
 
+		virtual void bind() const = 0;
+		virtual void unbind() const = 0;
 
-		void bind() const;
-		void unbind() const;
-
-	private:
-		uint32_t m_rendererID;	
+		static Shader* create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
 }
