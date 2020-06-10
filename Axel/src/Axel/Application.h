@@ -11,6 +11,7 @@
 
 #include "Axel/Renderer/Shader.h"
 #include "Axel/Renderer/Buffer.h"
+#include "Axel/Renderer/VertexArray.h"
 
 namespace Axel {
 
@@ -37,11 +38,10 @@ namespace Axel {
 		bool m_running = true;
 		LayerStack m_layerStack;
 
-
-		unsigned int m_vertexArray;
-		std::unique_ptr<Shader> m_shader;
-		std::unique_ptr<VertexBuffer> m_vertexBuffer;
-		std::unique_ptr<IndexBuffer> m_indexBuffer;
+		std::shared_ptr<Shader> m_shader;
+		std::shared_ptr<VertexArray> m_vertexArray;
+		std::shared_ptr<VertexBuffer> m_vertexBuffer;
+		std::shared_ptr<IndexBuffer> m_indexBuffer;
 	private:
 		static Application* s_instance;
 	};
