@@ -29,7 +29,6 @@ namespace Axel {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-
 	////////////////// ****Index Buffer**** //////////////////
 
 	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)

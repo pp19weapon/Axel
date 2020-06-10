@@ -10,18 +10,18 @@ namespace Axel {
 	{
 		switch (Renderer::getAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			AX_CORE_ASSERT(false, "None is currently not supported as a rendering API!\n Supported API(s): OpenGL");
 			return nullptr;
 
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexBuffer(verticies, size);
 
-		case RendererAPI::Direct3D:
+		case RendererAPI::API::Direct3D:
 			AX_CORE_ASSERT(false, "Direct3D is currently not supported as a rendering API!\n Supported API(s): OpenGL");
 			return nullptr;
 
-		case RendererAPI::Vulkan:
+		case RendererAPI::API::Vulkan:
 			AX_CORE_ASSERT(false, "Vulkan is currently not supported as a rendering API!\n Supported API(s): OpenGL");
 			return nullptr;
 		}
@@ -33,18 +33,18 @@ namespace Axel {
 	{
 		switch (Renderer::getAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			AX_CORE_ASSERT(false, "None is currently not supported as a rendering API!\n Supported API(s): OpenGL");
 			return nullptr;
 
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLIndexBuffer(indices, count);
 
-		case RendererAPI::Direct3D:
+		case RendererAPI::API::Direct3D:
 			AX_CORE_ASSERT(false, "Direct3D is currently not supported as a rendering API!\n Supported API(s): OpenGL");
 			return nullptr;
 
-		case RendererAPI::Vulkan:
+		case RendererAPI::API::Vulkan:
 			AX_CORE_ASSERT(false, "Vulkan is currently not supported as a rendering API!\n Supported API(s): OpenGL");
 			return nullptr;
 		}

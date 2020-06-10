@@ -2,8 +2,11 @@
 
 namespace Axel {
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> test_build
 	enum class ShaderDataType
 	{
 		None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
@@ -66,7 +69,11 @@ namespace Axel {
 
 	class BufferLayout {
 	public:
+<<<<<<< HEAD
 		BufferLayout() = default;
+=======
+		BufferLayout() {}
+>>>>>>> test_build
 		BufferLayout(const std::initializer_list<BufferElement>& t_elements) 
 			: m_elements(t_elements)
 		{
@@ -95,19 +102,27 @@ namespace Axel {
 		uint32_t m_stride = 0;
 	};
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> test_build
 	class VertexBuffer {
 	public:
+		VertexBuffer() {}
 		virtual ~VertexBuffer() = default;
 
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
+
+		virtual void setLayout(const BufferLayout& layout) = 0;
+		virtual const BufferLayout& getLayout() const = 0;
 
 		static VertexBuffer* create(float* verticies, uint32_t size);
 	};
 
 	class IndexBuffer {
 	public:
+		IndexBuffer() {}
 		virtual ~IndexBuffer() = default;
 
 		virtual void bind() const = 0;

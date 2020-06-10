@@ -13,8 +13,13 @@ namespace Axel {
 		virtual void addVertexBuffer(const std::shared_ptr<VertexBuffer>& t_vertexBuffer) override;
 		virtual void setIndexBuffer(const std::shared_ptr<IndexBuffer>& t_indexBuffer) override;
 
+<<<<<<< HEAD
 		virtual const std::vector<std::shared_ptr<VertexBuffer>>& getVertexBuffers() const override{ return m_vertexBuffers; }
 		virtual const std::shared_ptr<IndexBuffer>& getIndexBuffer() const override{ return m_indexBuffer; }
+=======
+		virtual const std::vector<std::shared_ptr<VertexBuffer>>& getVertexBuffers const override{ return m_vertexBuffers; }
+		virtual const std::shared_ptr<IndexBuffer>& getIndexBuffer const override{ return m_indexBuffer; }
+>>>>>>> test_build
 	private:
 		uint32_t m_rendererID;
 		std::vector<std::shared_ptr<VertexBuffer>> m_vertexBuffers;

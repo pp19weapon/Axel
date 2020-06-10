@@ -1,13 +1,11 @@
 #include "axpch.h"
-#include "Shader.h"
 
+#include "VertexArray.h"
 #include "Renderer.h"
-
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Axel {
-
-	Shader* Shader::create(const std::string& vertexSrc, const std::string& fragmentSrc)
+	VertexArray* VertexArray::create()
 	{
 		switch (Renderer::getAPI())
 		{
@@ -16,7 +14,7 @@ namespace Axel {
 			return nullptr;
 
 		case RendererAPI::API::OpenGL:
-			return new OpenGLShader(vertexSrc, fragmentSrc);
+			return new OpenGLVertexArray();
 
 		case RendererAPI::API::Direct3D:
 			AX_CORE_ASSERT(false, "Direct3D is currently not supported as a rendering API!\n Supported API(s): OpenGL");
