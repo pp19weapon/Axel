@@ -65,7 +65,6 @@ namespace Axel {
 	class BufferLayout {
 	public:
 		BufferLayout() = default;
-
 		BufferLayout(const std::initializer_list<BufferElement>& t_elements) 
 			: m_elements(t_elements)
 		{
@@ -97,7 +96,7 @@ namespace Axel {
 
 	class VertexBuffer {
 	public:
-		VertexBuffer() {}
+		VertexBuffer() = default;
 		virtual ~VertexBuffer() = default;
 
 		virtual void bind() const = 0;
@@ -111,7 +110,7 @@ namespace Axel {
 
 	class IndexBuffer {
 	public:
-		IndexBuffer() {}
+		IndexBuffer() = default;
 		virtual ~IndexBuffer() = default;
 
 		virtual void bind() const = 0;
