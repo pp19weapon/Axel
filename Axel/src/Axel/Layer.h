@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Axel/Core/Timestep.h"
 #include "Events/Event.h"
 
 namespace Axel {
@@ -10,7 +11,7 @@ namespace Axel {
 
 		virtual void onAttach() {}
 		virtual void onDetach() {}
-		virtual void onUpdate() {}
+		virtual void onUpdate(Timestep ts) {}
 		virtual void onImGuiRender() {}
 		virtual void onEvent(Event& event) {}
 

@@ -5,6 +5,7 @@
 
 #include "Input.h"
 
+#include <GLFW/glfw3.h>
 
 
 namespace Axel {
@@ -18,6 +19,7 @@ namespace Axel {
 
 		m_window = std::unique_ptr<Window>(Window::create());
 		m_window->setEventCallback(AX_BIND_EVENT_FN(Application::onEvent));
+		m_window->setVSync(true);
 
 		m_ImGuiLayer = new ImGuiLayer();
 		pushOverlay(m_ImGuiLayer);
@@ -28,8 +30,12 @@ namespace Axel {
 	void Application::run()
 	{
 		while (m_running) {
+			float time = (float)glfwGetTime();		//TODO: Make platform specific Platform::GetTime()
+			Timestep timestep = time - m_lastFrameTime;
+			m_lastFrameTime = time;
+
 			for (Layer* layer : m_layerStack) {
-				layer->onUpdate();
+				layer->onUpdate(timestep);
 			}
 
 			m_ImGuiLayer->begin();

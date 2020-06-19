@@ -2,6 +2,7 @@
 #include "OpenGLShader.h"
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Axel {
 
@@ -122,6 +123,48 @@ namespace Axel {
 	void OpenGLShader::unbind() const
 	{
 		glUseProgram(0);
+	}
+
+	void OpenGLShader::uploadUniformMat4(const std::string& t_name, const glm::mat4& t_matrix) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(t_matrix));
+	}
+
+	void OpenGLShader::uploadUniformMat3(const std::string& t_name, const glm::mat3& t_matrix) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(t_matrix));
+	}
+
+	void OpenGLShader::uploadUniformFloat4(const std::string& t_name, const glm::vec4& t_values) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniform4f(location, t_values.x, t_values.y, t_values.z, t_values.w);
+	}
+
+	void OpenGLShader::uploadUniformFloat3(const std::string& t_name, const glm::vec3& t_values) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniform3f(location, t_values.x, t_values.y, t_values.z);
+	}
+
+	void OpenGLShader::uploadUniformFloat2(const std::string& t_name, const glm::vec2& t_values) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniform2f(location, t_values.x, t_values.y);
+	}
+
+	void OpenGLShader::uploadUniformFloat(const std::string& t_name, float t_value) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniform1f(location, t_value);
+	}
+
+	void OpenGLShader::uploadUniformInt(const std::string& t_name, int t_value) const
+	{
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		glUniform1i(location, t_value);
 	}
 
 }

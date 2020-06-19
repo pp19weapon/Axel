@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string.h>
 
 namespace Axel {
 	class Shader {

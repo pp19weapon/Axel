@@ -7,6 +7,8 @@
 #include "Axel/Events/ApplicationEvent.h"
 #include "Axel/LayerStack.h"
 
+#include "Axel/Core/Timestep.h"
+
 #include "Axel/ImGui/ImGuiLayer.h"
 
 namespace Axel {
@@ -26,13 +28,16 @@ namespace Axel {
 
 		inline static Application& get() { return *s_instance; }
 		inline Window& getWindow() { return *m_window; }
+
 	private:
 		bool onWindowClose(WindowCloseEvent e);
 
+	private:
 		std::unique_ptr<Window> m_window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_running = true;
 		LayerStack m_layerStack;
+		float m_lastFrameTime = 0.0f;
 
 	private:
 		static Application* s_instance;
