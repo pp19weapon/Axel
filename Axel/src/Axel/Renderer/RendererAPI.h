@@ -18,7 +18,7 @@ namespace Axel {
 		virtual void setClearColor(const glm::vec4& t_color) = 0;
 		virtual void clear() = 0;
 
-		virtual void drawIndexed(const std::shared_ptr<VertexArray>& t_vertexArray) = 0;
+		virtual void drawIndexed(const ref<VertexArray>& t_vertexArray) = 0;
 
 		inline static API getAPI() { return s_api; }
 	private:

@@ -10,7 +10,7 @@ namespace Axel {
 
 		virtual void setClearColor(const glm::vec4& t_color) override;
 		virtual void clear() override;
-		virtual void drawIndexed(const std::shared_ptr<VertexArray>& t_vertexArray) override;
+		virtual void drawIndexed(const ref<VertexArray>& t_vertexArray) override;
 	};
 
 }

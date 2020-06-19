@@ -46,7 +46,7 @@ namespace Axel {
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& t_vertexBuffer)
+	void OpenGLVertexArray::addVertexBuffer(const ref<VertexBuffer>& t_vertexBuffer)
 	{
 		AX_CORE_ASSERT(t_vertexBuffer->getLayout().getElements().size(), "Vertex buffer has no layout!");
 
@@ -71,7 +71,7 @@ namespace Axel {
 		m_vertexBuffers.push_back(t_vertexBuffer);
 	}
 
-	void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& t_indexBuffer)
+	void OpenGLVertexArray::setIndexBuffer(const ref<IndexBuffer>& t_indexBuffer)
 	{
 		glBindVertexArray(m_rendererID);
 		t_indexBuffer->bind();

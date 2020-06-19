@@ -13,7 +13,7 @@ namespace Axel {
 			s_rendererAPI->clear();
 		}
 
-		inline static void drawIndexed(const std::shared_ptr<VertexArray>& t_vertexArray) {
+		inline static void drawIndexed(const ref<VertexArray>& t_vertexArray) {
 			s_rendererAPI->drawIndexed(t_vertexArray);
 		}
 	private:

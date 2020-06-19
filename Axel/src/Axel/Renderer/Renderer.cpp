@@ -16,7 +16,7 @@ namespace Axel {
 	{
 	}
 
-	void Renderer::submit(const std::shared_ptr<VertexArray>& t_vertexArray, const std::shared_ptr<Shader>& t_shader, const glm::mat4& t_transform)
+	void Renderer::submit(const ref<VertexArray>& t_vertexArray, const ref<Shader>& t_shader, const glm::mat4& t_transform /*= glm::mat4(1.0f)*/)
 	{
 		t_shader->bind();
 		std::dynamic_pointer_cast<OpenGLShader>(t_shader)->uploadUniformMat4("u_ViewProjection", m_sceneData->viewProjectionMatrix);

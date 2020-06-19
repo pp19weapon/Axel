@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 #ifdef AX_PLATFORM_WINDOWS
 
@@ -22,8 +23,14 @@
 	#define AX_CORE_ASSERT(x , ...)
 #endif // AX_ENABLE_ASSERTS
 
-
-
 #define BIT(x) (1 << x)
 
 #define AX_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace Axel {
+	template<typename T>
+	using scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using ref = std::shared_ptr<T>;
+}

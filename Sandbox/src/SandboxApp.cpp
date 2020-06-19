@@ -13,7 +13,7 @@ public:
 	{
 		Axel::FPSCounter::init(60);
 
-		m_vertexArray = std::shared_ptr<Axel::VertexArray>(Axel::VertexArray::create());
+		m_vertexArray = Axel::ref<Axel::VertexArray>(Axel::VertexArray::create());
 
 		float vertices[4 * 3] = {
 			-0.5f,  0.5f, 1.0f, // Top-left
@@ -22,7 +22,7 @@ public:
 			-0.5f, -0.5f, 1.0f, // Bottom-left
 		};
 
-		m_vertexBuffer = std::shared_ptr<Axel::VertexBuffer>(Axel::VertexBuffer::create(vertices, sizeof(vertices)));
+		m_vertexBuffer = Axel::ref<Axel::VertexBuffer>(Axel::VertexBuffer::create(vertices, sizeof(vertices)));
 		Axel::BufferLayout layout = {
 			{ Axel::ShaderDataType::Float3, "a_Position" }
 		};
@@ -32,7 +32,7 @@ public:
 
 		uint32_t indices[6] = { 0, 1, 2, 2, 3, 0 };
 
-		m_indexBuffer = std::shared_ptr<Axel::IndexBuffer>(Axel::IndexBuffer::create(indices, 6));
+		m_indexBuffer = Axel::ref<Axel::IndexBuffer>(Axel::IndexBuffer::create(indices, 6));
 		m_vertexArray->setIndexBuffer(m_indexBuffer);
 
 		std::string vertexSrc = R"(
@@ -70,7 +70,7 @@ public:
 			}
 		)";
 
-		m_squareShader = std::shared_ptr<Axel::Shader>(Axel::Shader::create(vertexSrc, fragmentSrc));
+		m_squareShader = Axel::ref<Axel::Shader>(Axel::Shader::create(vertexSrc, fragmentSrc));
 	}
 
 	virtual void onUpdate(Axel::Timestep ts) override {
@@ -107,8 +107,8 @@ public:
 		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_squareShader)->bind();
 		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_squareShader)->uploadUniformFloat3("u_Color", m_squareColor);
 
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < 30; y++) {
+			for (int x = 0; x < 30; x++) {
 				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
@@ -136,10 +136,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Axel::Shader> m_squareShader;
-	std::shared_ptr<Axel::VertexArray> m_vertexArray;
-	std::shared_ptr<Axel::VertexBuffer> m_vertexBuffer;
-	std::shared_ptr<Axel::IndexBuffer> m_indexBuffer;
+	Axel::ref<Axel::Shader> m_squareShader;
+	Axel::ref<Axel::VertexArray> m_vertexArray;
+	Axel::ref<Axel::VertexBuffer> m_vertexBuffer;
+	Axel::ref<Axel::IndexBuffer> m_indexBuffer;
+
 	Axel::OrthographicCamera m_camera;
 
 	glm::vec3 m_position;

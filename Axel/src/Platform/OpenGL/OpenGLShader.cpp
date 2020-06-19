@@ -127,44 +127,56 @@ namespace Axel {
 
 	void OpenGLShader::uploadUniformMat4(const std::string& t_name, const glm::mat4& t_matrix) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(t_matrix));
 	}
 
 	void OpenGLShader::uploadUniformMat3(const std::string& t_name, const glm::mat3& t_matrix) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(t_matrix));
 	}
 
 	void OpenGLShader::uploadUniformFloat4(const std::string& t_name, const glm::vec4& t_values) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniform4f(location, t_values.x, t_values.y, t_values.z, t_values.w);
 	}
 
 	void OpenGLShader::uploadUniformFloat3(const std::string& t_name, const glm::vec3& t_values) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniform3f(location, t_values.x, t_values.y, t_values.z);
 	}
 
 	void OpenGLShader::uploadUniformFloat2(const std::string& t_name, const glm::vec2& t_values) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniform2f(location, t_values.x, t_values.y);
 	}
 
 	void OpenGLShader::uploadUniformFloat(const std::string& t_name, float t_value) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniform1f(location, t_value);
 	}
 
 	void OpenGLShader::uploadUniformInt(const std::string& t_name, int t_value) const
 	{
-		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		GLint location = getUniformLocation(t_name);
 		glUniform1i(location, t_value);
+	}
+
+	int OpenGLShader::getUniformLocation(const std::string& t_name) const
+	{
+		auto locationSearch = m_uniformLocationCache.find(t_name);
+		if (locationSearch != m_uniformLocationCache.end()){
+			return locationSearch->second;
+		}
+		
+		GLint location = glGetUniformLocation(m_rendererID, t_name.c_str());
+		m_uniformLocationCache[t_name] = location;
+		return location;
 	}
 
 }

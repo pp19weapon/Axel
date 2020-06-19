@@ -2,6 +2,8 @@
 
 #include "Axel/Renderer/Shader.h"
 #include <glm/glm.hpp>
+#include <unordered_map>
+#include <string>
 
 namespace Axel {
 	class OpenGLShader : public Shader {
@@ -23,6 +25,10 @@ namespace Axel {
 		void uploadUniformInt(const std::string& t_name, int t_value) const;
 
 	private:
+		int getUniformLocation(const std::string& t_name) const;
+
+	private:
 		uint32_t m_rendererID;
+		mutable std::unordered_map<std::string, int> m_uniformLocationCache;
 	};
 }
