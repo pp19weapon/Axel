@@ -15,16 +15,17 @@ public:
 
 		m_vertexArray = Axel::ref<Axel::VertexArray>(Axel::VertexArray::create());
 
-		float vertices[4 * 3] = {
-			-0.5f,  0.5f, 1.0f, // Top-left
-			 0.5f,  0.5f, 0.0f, // Top-right
-			 0.5f, -0.5f, 0.0f, // Bottom-right
-			-0.5f, -0.5f, 1.0f, // Bottom-left
+		float vertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,  // Bottom-left
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,  // Bottom-right
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,  // Top-right
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f   // Top-left
 		};
 
 		m_vertexBuffer = Axel::ref<Axel::VertexBuffer>(Axel::VertexBuffer::create(vertices, sizeof(vertices)));
 		Axel::BufferLayout layout = {
-			{ Axel::ShaderDataType::Float3, "a_Position" }
+			{ Axel::ShaderDataType::Float3, "a_Position" },
+			{ Axel::ShaderDataType::Float2, "a_TexCoord" }
 		};
 
 		m_vertexBuffer->setLayout(layout);
@@ -32,30 +33,26 @@ public:
 
 		uint32_t indices[6] = { 0, 1, 2, 2, 3, 0 };
 
-		m_indexBuffer = Axel::ref<Axel::IndexBuffer>(Axel::IndexBuffer::create(indices, 6));
-		m_vertexArray->setIndexBuffer(m_indexBuffer);
+		m_vertexArray->setIndexBuffer(Axel::IndexBuffer::create(indices, 6));
 
-		std::string vertexSrc = R"(
+		std::string flatColorVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
-			out vec4 v_Color;
 
 			void main()
 			{
 				v_Position = a_Position;
-				v_Color = a_Color;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
-		std::string fragmentSrc = R"(
+		std::string flatColorFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
@@ -70,7 +67,47 @@ public:
 			}
 		)";
 
-		m_squareShader = Axel::ref<Axel::Shader>(Axel::Shader::create(vertexSrc, fragmentSrc));
+		m_flatColorShader = Axel::ref<Axel::Shader>(Axel::Shader::create(flatColorVertexSrc, flatColorFragmentSrc));
+
+		std::string textureVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_textureShader = Axel::ref<Axel::Shader>(Axel::Shader::create(textureVertexSrc, textureFragmentSrc));
+
+		m_texture = Axel::Texture2D::create("assets/textures/checkerboard.png");
+
+		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_textureShader)->bind();
+		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_textureShader)->uploadUniformInt("u_Texture", 0);
 	}
 
 	virtual void onUpdate(Axel::Timestep ts) override {
@@ -104,18 +141,20 @@ public:
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_squareShader)->bind();
-		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_squareShader)->uploadUniformFloat3("u_Color", m_squareColor);
+		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_flatColorShader)->bind();
+		std::dynamic_pointer_cast<Axel::OpenGLShader>(m_flatColorShader)->uploadUniformFloat3("u_Color", m_squareColor);
 
 		for (int y = 0; y < 30; y++) {
 			for (int x = 0; x < 30; x++) {
 				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
-				Axel::Renderer::submit(m_vertexArray, m_squareShader, transform);
+				Axel::Renderer::submit(m_vertexArray, m_flatColorShader, transform);
 			}
 		}
 
+		m_texture->bind();
+		Axel::Renderer::submit(m_vertexArray, m_textureShader, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
 		Axel::Renderer::endScene();
 
@@ -136,10 +175,12 @@ public:
 	}
 
 private:
-	Axel::ref<Axel::Shader> m_squareShader;
+	Axel::ref<Axel::Shader> m_flatColorShader, m_textureShader;
+
 	Axel::ref<Axel::VertexArray> m_vertexArray;
 	Axel::ref<Axel::VertexBuffer> m_vertexBuffer;
-	Axel::ref<Axel::IndexBuffer> m_indexBuffer;
+
+	Axel::ref<Axel::Texture2D> m_texture;
 
 	Axel::OrthographicCamera m_camera;
 

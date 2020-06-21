@@ -118,7 +118,7 @@ namespace Axel {
 
 		virtual uint32_t getCount() const = 0;
 
-		static IndexBuffer* create(uint32_t* indices, uint32_t count);
+		static ref<IndexBuffer> create(uint32_t* indices, uint32_t count);
 	};
 
 }

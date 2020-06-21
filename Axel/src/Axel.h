@@ -22,6 +22,7 @@
 
 #include "Axel/Renderer/Buffer.h"
 #include "Axel/Renderer/Shader.h"
+#include "Axel/Renderer/Texture.h"
 #include "Axel/Renderer/VertexArray.h"
 
 #include "Axel/Renderer/OrthographicCamera.h"

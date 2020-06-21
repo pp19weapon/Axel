@@ -17,6 +17,7 @@ includeDir["GLFW"] = "Axel/vendor/GLFW/include"
 includeDir["Glad"] = "Axel/vendor/Glad/include"
 includeDir["ImGui"] = "Axel/vendor/imgui"
 includeDir["glm"] = "Axel/vendor/glm"
+includeDir["stb_image"] = "Axel/vendor/stb_image"
 
 group "Dependencies"
     include "Axel/vendor/GLFW"
@@ -41,7 +42,12 @@ project "Axel"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/stb_image.cpp",
+        "%{prj.name}/vendor/stb_image/stb_image.h",
+        "%{prj.name}/vendor/glm/glm/**.inl",
+        "%{prj.name}/vendor/glm/glm/**.hpp"
+
     }
 
     includedirs
@@ -51,7 +57,9 @@ project "Axel"
         "%{includeDir.GLFW}",
         "%{includeDir.Glad}",
         "%{includeDir.ImGui}",
-        "%{includeDir.glm}"
+        "%{includeDir.glm}",
+        "%{includeDir.stb_image}"
+
     }
 
     links

@@ -29,7 +29,7 @@ namespace Axel {
 		AX_CORE_ASSERT(false, "Unknown renderer API!");
 		return nullptr;
 	}
-	IndexBuffer* IndexBuffer::create(uint32_t* indices, uint32_t count)
+	ref<IndexBuffer> IndexBuffer::create(uint32_t* indices, uint32_t count)
 	{
 		switch (Renderer::getAPI())
 		{
@@ -38,7 +38,7 @@ namespace Axel {
 			return nullptr;
 
 		case RendererAPI::API::OpenGL:
-			return new OpenGLIndexBuffer(indices, count);
+			return std::make_shared<OpenGLIndexBuffer>(indices, count);
 
 		case RendererAPI::API::Direct3D:
 			AX_CORE_ASSERT(false, "Direct3D is currently not supported as a rendering API!\n Supported API(s): OpenGL");
